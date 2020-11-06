@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, TabBarIOS, ClippingRectangle } from "react-native";
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TransitionPresets } from '@react-navigation/stack';
@@ -25,6 +25,19 @@ const config = {
     },
   };
 
+const MyTheme = {
+  dark: false,
+  colors: {
+    primary: '#6200EE',
+    secondary: '#000000',
+    background: '#000000',
+    card: '#FF0266',
+    text: '#ffffff',
+    border: 'rgb(199, 199, 204)',
+    notification: 'rgb(255, 69, 58)',
+  },
+}  
+
 const tabNavigator = () => {
   return(
     <Tab.Navigator screenOptions={({route}) => ({
@@ -34,18 +47,20 @@ const tabNavigator = () => {
                 case "Home":
                   iconName = "home"
                   break
-                  
                 case "Feed":
                   iconName = "rss"
                   break
-
                 default:
                   iconName="rocket"  
             }
-            return <Icon name={iconName} size={size} color="#000"/>
-        }
-    })}>
-
+            return <Icon name={iconName} size={size} color={color}/>
+        },
+    })}
+    tabBarOptions={{
+        activeTintColor: '#03DAC5',
+        inactiveTintColor: '#cccccc'
+      }}
+    >
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Feed" component={FeedPage}/>
     </Tab.Navigator>
